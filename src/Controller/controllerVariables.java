@@ -28,9 +28,11 @@ package Controller;
 import static Controller.controllerVariables.Layer.*;
 import Model.fileInfoTableModel;
 import Model.Component;
+import Model.Reel;
 import Model.Stack;
 import Model.outputComponent;
 import Model.componentListTableModel;
+import Model.reelConfigurationTableModel;
 import Model.stackTableModel;
 import java.io.File;
 import java.util.ArrayList;
@@ -51,7 +53,29 @@ public class controllerVariables {
     componentListTableModel ctm;
     stackTableModel stm;
     ArrayList<Stack> stackList;
+    reelConfigurationTableModel rctm;
+    ArrayList<Reel> reelList;
 
+    public reelConfigurationTableModel getReelConfigurationTableModel() {
+        if (rctm != null){
+            return rctm;
+        }else{
+            return (new reelConfigurationTableModel());
+        }
+    }
+
+    public void setReelConfigurationTableModel(reelConfigurationTableModel rctm) {
+        this.rctm = rctm;
+    }
+
+    public ArrayList<Reel> getReelList() {
+        return reelList;
+    }
+
+    public void setReelList(ArrayList<Reel> reelList) {
+        this.reelList = reelList;
+    }
+            
     public ArrayList<Stack> getStackList() {
         return stackList;
     }

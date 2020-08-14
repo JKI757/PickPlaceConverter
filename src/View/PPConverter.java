@@ -49,8 +49,8 @@ public class PPConverter extends javax.swing.JFrame {
         StackListTable = new javax.swing.JTable();
         ComponentListScrollPane = new javax.swing.JScrollPane();
         ComponentListTable = new javax.swing.JTable();
-        PanelListPane = new javax.swing.JScrollPane();
-        PanelListTable = new javax.swing.JTable();
+        ReelConfigurationScrollPane = new javax.swing.JScrollPane();
+        ReelConfigurationListTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         generateStackButton = new javax.swing.JButton();
         bothHeads = new javax.swing.JCheckBox();
@@ -89,20 +89,10 @@ public class PPConverter extends javax.swing.JFrame {
 
         mainTabFrame.addTab("Component List", ComponentListScrollPane);
 
-        PanelListTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        PanelListPane.setViewportView(PanelListTable);
+        ReelConfigurationListTable.setModel(cv.getReelConfigurationTableModel());
+        ReelConfigurationScrollPane.setViewportView(ReelConfigurationListTable);
 
-        mainTabFrame.addTab("Panel List", PanelListPane);
+        mainTabFrame.addTab("Reel Configuration", ReelConfigurationScrollPane);
 
         generateStackButton.setText("Generate Stack");
         generateStackButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -311,19 +301,26 @@ public class PPConverter extends javax.swing.JFrame {
             ComponentListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
         }
         if (cv.getStackList() == null){
-            cv.setStackList(new ArrayList<Stack>(1));
-            
-        }
-        cv.getStackList().add(new Stack(cv.getICL()));
-        //need to check for whether this table has been created alraedy and create it here only once.
-        cv.getStackList().get(cv.getStackList().size()-1).setNo(cv.getStackList().size()-1);
-        cv.setStackTableModel(new stackTableModel(cv.getStackList()));
+            cv.setStackList(new ArrayList<Stack>());
+            cv.getStackList().add(new Stack(cv.getICL()));
+            cv.getStackList().get(cv.getStackList().size()-1).setNo(cv.getStackList().size()-1);
+            cv.setStackTableModel(new stackTableModel(cv.getStackList()));
 
-        StackListTable.setModel(cv.getStackTableModel());
-        for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
-            StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
-        }
+            StackListTable.setModel(cv.getStackTableModel());
+            for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
+                StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
+            }
 
+        } else {
+            cv.getStackList().add(new Stack(cv.getICL()));
+            cv.getStackList().get(cv.getStackList().size()-1).setNo(cv.getStackList().size()-1);
+//            cv.setStackTableModel(new stackTableModel(cv.getStackList()));
+
+//            StackListTable.setModel(cv.getStackTableModel());
+//            for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
+//                StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
+//            }
+        }
         
         StackListTable.updateUI();
         ComponentListTable.updateUI();
@@ -395,8 +392,8 @@ public class PPConverter extends javax.swing.JFrame {
     private javax.swing.JTable ComponentListTable;
     private javax.swing.JScrollPane FileInfoPane;
     private javax.swing.JTable FileInfoTable;
-    private javax.swing.JScrollPane PanelListPane;
-    private javax.swing.JTable PanelListTable;
+    private javax.swing.JTable ReelConfigurationListTable;
+    private javax.swing.JScrollPane ReelConfigurationScrollPane;
     private javax.swing.JScrollPane StackListScrollPane;
     private javax.swing.JTable StackListTable;
     private javax.swing.JCheckBox bothHeads;
