@@ -28,6 +28,7 @@ package Controller;
 import static Controller.controllerVariables.Layer.*;
 import Model.fileInfoTableModel;
 import Model.Component;
+import Model.Stack;
 import Model.outputComponent;
 import Model.componentListTableModel;
 import Model.stackTableModel;
@@ -49,6 +50,17 @@ public class controllerVariables {
     fileInfoTableModel fitm;
     componentListTableModel ctm;
     stackTableModel stm;
+    ArrayList<Stack> stackList;
+
+    public ArrayList<Stack> getStackList() {
+        return stackList;
+    }
+
+    public void setStackList(ArrayList<Stack> stackList) {
+        this.stackList = stackList;
+    }
+    
+    
     String currentDirectory = System.getProperty("user.dir");
     public enum Layer{Top, Bottom};
     Layer layer=Top;

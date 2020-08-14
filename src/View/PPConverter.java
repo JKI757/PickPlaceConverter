@@ -13,6 +13,7 @@ import javax.swing.JFileChooser;
 import Model.*;
 import static Model.Component.Skip.*;
 import static Model.Component.Visual.*;
+import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -21,13 +22,13 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author josh
  */
 public class PPConverter extends javax.swing.JFrame {
+
     controllerVariables cv;
-    
     /**
      * Creates new form mainFrame
      */
     public PPConverter(controllerVariables cv) {
-        this.cv=cv;
+        this.cv = cv;
         initComponents();
     }
 
@@ -51,7 +52,7 @@ public class PPConverter extends javax.swing.JFrame {
         PanelListPane = new javax.swing.JScrollPane();
         PanelListTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        convertButton = new javax.swing.JButton();
+        generateStackButton = new javax.swing.JButton();
         bothHeads = new javax.swing.JCheckBox();
         topLayerButton = new javax.swing.JRadioButton();
         bottomLayerButton = new javax.swing.JRadioButton();
@@ -103,15 +104,15 @@ public class PPConverter extends javax.swing.JFrame {
 
         mainTabFrame.addTab("Panel List", PanelListPane);
 
-        convertButton.setText("Convert");
-        convertButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        generateStackButton.setText("Generate Stack");
+        generateStackButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                convertButtonMouseClicked(evt);
+                generateStackButtonMouseClicked(evt);
             }
         });
-        convertButton.addActionListener(new java.awt.event.ActionListener() {
+        generateStackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                convertButtonActionPerformed(evt);
+                generateStackButtonActionPerformed(evt);
             }
         });
 
@@ -151,7 +152,7 @@ public class PPConverter extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(convertButton)
+                                .addComponent(generateStackButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(invertButton))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -170,7 +171,7 @@ public class PPConverter extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(convertButton)
+                    .addComponent(generateStackButton)
                     .addComponent(invertButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -244,14 +245,15 @@ public class PPConverter extends javax.swing.JFrame {
             cv.setFileInfoTableModel(new Model.fileInfoTableModel(cv.getRF().getComponentList()));
             FileInfoTable.setModel(cv.getFileInfoTableModel());
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-            centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
-             for(int x=0;x<cv.getFileInfoTableModel().getColumnCount();x++){
-                FileInfoTable.getColumnModel().getColumn(x).setCellRenderer( centerRenderer );
+            for (int x = 0; x < cv.getFileInfoTableModel().getColumnCount(); x++) {
+                FileInfoTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
             }
 
             FileInfoTable.updateUI();
-        } else {    ;    }
+        } else {;
+        }
     }//GEN-LAST:event_readFileMenuItemActionPerformed
 
     private void writeFileMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writeFileMenuItemActionPerformed
@@ -261,7 +263,7 @@ public class PPConverter extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             cv.setOutputFile(fc.getSelectedFile());
             cv.setCurrentDirectory(cv.getOutputFile().getPath());//store the current directory here so we can retrieve it later when we do other file operations
-            
+
 //            cv.setRF(new readInputFile(cv.getInputFile()));
 //            cv.getRF().getComponentList();
 //            cv.setfileInfoTabHeaders(cv.getRF().getColumnNames());
@@ -269,52 +271,64 @@ public class PPConverter extends javax.swing.JFrame {
 //            FileInfoTable.setModel(cv.getFileInfoTableModel());
 //            FileInfoTable.updateUI();
         } else {
-            
+
         }
 
     }//GEN-LAST:event_writeFileMenuItemActionPerformed
 
-    private void convertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertButtonActionPerformed
+    private void generateStackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateStackButtonActionPerformed
         // TODO add your handling code here:
-        
-        for (Component component : cv.getRF().getComponentList()){
-            
-            
+
+        for (Component component : cv.getRF().getComponentList()) {
+
             //this is for future use, we're going to sanitize the angles here
             //we're going to look up components in the database
             //verify height and speed and head
-            
             component.setDelay(0);
-            if (cv.getLayer() == Top){
+            if (cv.getLayer() == Top) {
                 component.setLayer('T');
-            }else{
+            } else {
                 component.setLayer('B');
             }
             component.setNo(component.getDesignator());
-            if (!cv.isUseBothHeads()){
+            if (!cv.isUseBothHeads()) {
                 component.setPHead(1);
-            }else{
+            } else {
                 ;//do something else that I don't care about right now
             }
             component.setVisual(Open);
             component.setSkip(CheckVacuum);
             component.setSpeed(0);
         }
-        
-            cv.setComponentListTableModel(new Model.componentListTableModel(cv.getRF().getComponentList()));
-            ComponentListTable.setModel(cv.getComponentListTableModel());
+
+        cv.setComponentListTableModel(new Model.componentListTableModel(cv.getRF().getComponentList()));
+        ComponentListTable.setModel(cv.getComponentListTableModel());
+        cv.setICL(cv.getRF().getComponentList());
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int x = 0; x < cv.getComponentListTableModel().getColumnCount(); x++) {
+            ComponentListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
+        }
+        if (cv.getStackList() == null){
+            cv.setStackList(new ArrayList<Stack>(1));
             
-            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-            centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        }
+        cv.getStackList().add(new Stack(cv.getICL()));
+        //need to check for whether this table has been created alraedy and create it here only once.
+        cv.getStackList().get(cv.getStackList().size()-1).setNo(cv.getStackList().size()-1);
+        cv.setStackTableModel(new stackTableModel(cv.getStackList()));
 
-             for(int x=0;x<cv.getComponentListTableModel().getColumnCount();x++){
-                ComponentListTable.getColumnModel().getColumn(x).setCellRenderer( centerRenderer );
-            }
+        StackListTable.setModel(cv.getStackTableModel());
+        for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
+            StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
+        }
 
-
-        ComponentListTable.updateUI();
         
-    }//GEN-LAST:event_convertButtonActionPerformed
+        StackListTable.updateUI();
+        ComponentListTable.updateUI();
+
+    }//GEN-LAST:event_generateStackButtonActionPerformed
 
     private void bottomLayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bottomLayerButtonActionPerformed
         // TODO add your handling code here:
@@ -328,16 +342,16 @@ public class PPConverter extends javax.swing.JFrame {
 
     private void bothHeadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bothHeadsActionPerformed
         // TODO add your handling code here:
-        if (bothHeads.isSelected()){
+        if (bothHeads.isSelected()) {
             cv.setUseBothHeads(true);
-        }else{
+        } else {
             cv.setUseBothHeads(false);
         }
     }//GEN-LAST:event_bothHeadsActionPerformed
 
-    private void convertButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_convertButtonMouseClicked
+    private void generateStackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generateStackButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_convertButtonMouseClicked
+    }//GEN-LAST:event_generateStackButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -387,9 +401,9 @@ public class PPConverter extends javax.swing.JFrame {
     private javax.swing.JTable StackListTable;
     private javax.swing.JCheckBox bothHeads;
     private javax.swing.JRadioButton bottomLayerButton;
-    private javax.swing.JButton convertButton;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JButton generateStackButton;
     private javax.swing.JButton invertButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;

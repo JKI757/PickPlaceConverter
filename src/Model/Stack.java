@@ -25,6 +25,7 @@
  */
 package Model;
 
+import Model.Component.Skip;
 import java.util.ArrayList;
 
 /**
@@ -45,7 +46,30 @@ public class Stack {
     int Count;
     
     ArrayList<Component> componentList;
+    
+    public Stack(ArrayList<Component> cl){
+        this.componentList = cl;
+        this.Count = this.componentList.size();
+        No=0;
+        xOffset = 0.0f;
+        yOffset = 0.0f;
+        Feed = componentList.get(0).getSpeed();//this might be wrong, check it
+        Comment = "";
+        Head = componentList.get(0).getPHead();
+        Height = componentList.get(0).getHeight();
+        Speed = componentList.get(0).getSpeed();
+        switch (componentList.get(0).getSkip()){
+            case None:{ Status = "None";}
+            case Skip:{ Status = "Skip";}
+            case CheckVacuum:{ Status = "Check Vacuum";}
+        }
+        switch (componentList.get(0).getVisual()){
+            case Open:{Visual = "Open";}
+            case Close:{Visual = "Close";}  
+        }
 
+        
+    }
     public ArrayList<Component> getComponentList() {
         return componentList;
     }
@@ -53,6 +77,24 @@ public class Stack {
     public void setComponentList(ArrayList<Component> componentList) {
         this.componentList = componentList;
         this.Count = this.componentList.size();
+        No=0;
+        xOffset = 0.0f;
+        yOffset = 0.0f;
+        Feed = componentList.get(0).getSpeed();//this might be wrong, check it
+        Comment = "";
+        Head = componentList.get(0).getPHead();
+        Height = componentList.get(0).getHeight();
+        Speed = componentList.get(0).getSpeed();
+        switch (componentList.get(0).getSkip()){
+            case None:{ Status = "None";}
+            case Skip:{ Status = "Skip";}
+            case CheckVacuum:{ Status = "Check Vacuum";}
+        }
+        switch (componentList.get(0).getVisual()){
+            case Open:{Visual = "Open";}
+            case Close:{Visual = "Close";}  
+        }
+
     }
     
     public int getNo() {

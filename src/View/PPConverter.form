@@ -213,7 +213,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="convertButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="generateStackButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="invertButton" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -241,7 +241,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="convertButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="generateStackButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="invertButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -259,13 +259,13 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="convertButton">
+        <Component class="javax.swing.JButton" name="generateStackButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Convert"/>
+            <Property name="text" type="java.lang.String" value="Generate Stack"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="convertButtonMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="convertButtonActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="generateStackButtonMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generateStackButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="bothHeads">

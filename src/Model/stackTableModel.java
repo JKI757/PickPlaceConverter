@@ -35,7 +35,7 @@ import javax.swing.table.AbstractTableModel;
 public class stackTableModel extends AbstractTableModel{
     
     
-    private String[] columnNames = {"Stack","X-Offset","Y-Offset","Feed","Coment","Head","Height","Speed", "Status", "Visual", "Count" };
+    private String[] columnNames = {"Stack","X-Offset","Y-Offset","Feed","Comment","Head","Height","Speed", "Status", "Visual", "Count" };
     private ArrayList<Stack> data;
     
     public stackTableModel(ArrayList<Stack> data){
