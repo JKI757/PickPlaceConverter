@@ -32,10 +32,12 @@ import Model.Reel;
 import Model.Stack;
 import Model.outputComponent;
 import Model.componentListTableModel;
-import Model.reelConfigurationTableModel;
+import Model.stackPresetsTableModel;
 import Model.stackTableModel;
 import java.io.File;
+import static java.lang.Math.abs;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -53,19 +55,25 @@ public class controllerVariables {
     componentListTableModel ctm;
     stackTableModel stm;
     ArrayList<Stack> stackList;
-    reelConfigurationTableModel rctm;
+    HashMap<String, Stack> stackMap; //componentID, stack
+    stackPresetsTableModel sptm;
     ArrayList<Reel> reelList;
+    ArrayList<Component> stackPresetList;
 
-    public reelConfigurationTableModel getReelConfigurationTableModel() {
-        if (rctm != null){
-            return rctm;
+    public ArrayList<Component> getStackPresetList() {return stackPresetList; }
+
+    public void setStackPresetList(ArrayList<Component> stackPresetList) { this.stackPresetList = stackPresetList;}
+    
+    public stackPresetsTableModel getStackPresetsTableModel() {
+        if (sptm != null){
+            return sptm;
         }else{
-            return (new reelConfigurationTableModel());
+            return (new stackPresetsTableModel());
         }
     }
 
-    public void setReelConfigurationTableModel(reelConfigurationTableModel rctm) {
-        this.rctm = rctm;
+    public void setStackPresetsTableModel(stackPresetsTableModel rctm) {
+        this.sptm = rctm;
     }
 
     public ArrayList<Reel> getReelList() {
@@ -143,4 +151,42 @@ public class controllerVariables {
         return currentDirectory;
     }
     public Layer getLayer(){return layer;}
+    
+    
+    public void makeStackList(){
+        //returns a stacklist from the already created component list        
+        
+        this.stackMap = new HashMap<String, Stack> ();
+        
+        if (this.icl != null) {
+            for (Component c : this.icl){
+                if (stackMap.containsKey(c.getComponentID()) ){
+                    stackMap.get(c.getComponentID()).addComponent(c);
+                }else{
+                    stackMap.put(c.getComponentID(), new Stack(c));
+                }
+                
+            }
+        }
+        
+        stackList = new ArrayList<Stack>(stackMap.values());
+        for (int i=0; i < stackList.size(); i++){
+            stackList.get(i).setStackID(i);
+            for (Component c: stackList.get(i).getComponentList()){
+                c.setSTNo(i);
+            }
+        }
+    }
+    
+    public void sanitizeAngles(){
+        if (this.icl != null){
+            for (Component c : this.icl){
+                if (c.getAngle() >= 180){
+                    c.setAngle((c.getAngle() - 180));
+                }else if (c.getAngle() < -180){
+                    c.setAngle((c.getAngle() + 180));
+                }
+            }
+        }
+    }
 }

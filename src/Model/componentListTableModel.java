@@ -25,8 +25,6 @@
  */
 package Model;
 
-import Model.Component.Skip;
-import Model.Component.Visual;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -37,7 +35,7 @@ import javax.swing.table.AbstractTableModel;
 public class componentListTableModel extends AbstractTableModel{
     
     
-    private String[] columnNames = {"No.","Head","Stack","X Coord","Y Coord","Angle","Height","Speed","Status","Visual","Designator","Comment"};
+    private String[] columnNames = {"No.","Head","Stack","X Coord","Y Coord","Angle","Height","Speed","Status","Visual","Component ID"};
             
     private ArrayList<Component> data;
     
@@ -93,22 +91,20 @@ public class componentListTableModel extends AbstractTableModel{
                 return Row.getSpeed();
             }
             case 8:{
-                return Row.getSkip();
+                return Row.isCheckVacuum();
             }
             case 9:{
-                return Row.getVisual();
+                return Row.isCheckVisual();
             }
             case 10:{
-                return Row.getDesignator();
-            }
-            case 11:{
-                return Row.getComment();
+                return Row.getComponentID();
             }
             default: return null;
         }
     }
+    @Override
     public Class getColumnClass(int c){
-        return getValueAt(0,c).getClass();
+            return getValueAt(0,c).getClass();
     }
     
     public void setValueAt(Object value, int row, int col){
@@ -140,16 +136,13 @@ public class componentListTableModel extends AbstractTableModel{
                     Row.setSpeed((Integer)value);
                 };break;
                 case 8:{
-                    Row.setSkip((Skip)value);
+                    Row.setCheckVacuum((Boolean)value);
                 };break;
                 case 9:{
-                    Row.setVisual((Visual)value);
+                    Row.setCheckVisual((Boolean)value);
                 };break;
                 case 10:{
-                    Row.setDesignator((Integer)value);
-                };break;
-                case 11:{
-                    Row.setComment((String)value);
+                    Row.setComponentID((String)value);
                 };break;
             }
         data.set(row, Row);

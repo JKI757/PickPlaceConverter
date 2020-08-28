@@ -11,8 +11,6 @@ import Controller.readInputFile;
 import java.io.File;
 import javax.swing.JFileChooser;
 import Model.*;
-import static Model.Component.Skip.*;
-import static Model.Component.Visual.*;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -49,8 +47,8 @@ public class PPConverter extends javax.swing.JFrame {
         StackListTable = new javax.swing.JTable();
         ComponentListScrollPane = new javax.swing.JScrollPane();
         ComponentListTable = new javax.swing.JTable();
-        ReelConfigurationScrollPane = new javax.swing.JScrollPane();
-        ReelConfigurationListTable = new javax.swing.JTable();
+        StackPresetsScrollPane = new javax.swing.JScrollPane();
+        StackPresetsListTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         generateStackButton = new javax.swing.JButton();
         bothHeads = new javax.swing.JCheckBox();
@@ -89,10 +87,10 @@ public class PPConverter extends javax.swing.JFrame {
 
         mainTabFrame.addTab("Component List", ComponentListScrollPane);
 
-        ReelConfigurationListTable.setModel(cv.getReelConfigurationTableModel());
-        ReelConfigurationScrollPane.setViewportView(ReelConfigurationListTable);
+        StackPresetsListTable.setModel(cv.getStackPresetsTableModel());
+        StackPresetsScrollPane.setViewportView(StackPresetsListTable);
 
-        mainTabFrame.addTab("Reel Configuration", ReelConfigurationScrollPane);
+        mainTabFrame.addTab("Stack Presets", StackPresetsScrollPane);
 
         generateStackButton.setText("Generate Stack");
         generateStackButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -231,8 +229,9 @@ public class PPConverter extends javax.swing.JFrame {
             cv.setInputFile(fc.getSelectedFile());
             cv.setCurrentDirectory(cv.getInputFile().getPath());//store the current directory here so we can retrieve it later when we do other file operations
             cv.setRF(new readInputFile(cv.getInputFile()));
+            cv.setICL(cv.getRF().getComponentList());
             cv.setfileInfoTabHeaders(cv.getRF().getColumnNames());
-            cv.setFileInfoTableModel(new Model.fileInfoTableModel(cv.getRF().getComponentList()));
+            cv.setFileInfoTableModel(new Model.fileInfoTableModel(cv.getICL()));
             FileInfoTable.setModel(cv.getFileInfoTableModel());
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -242,7 +241,8 @@ public class PPConverter extends javax.swing.JFrame {
             }
 
             FileInfoTable.updateUI();
-        } else {;
+        } else {
+            ;
         }
     }//GEN-LAST:event_readFileMenuItemActionPerformed
 
@@ -286,8 +286,8 @@ public class PPConverter extends javax.swing.JFrame {
             } else {
                 ;//do something else that I don't care about right now
             }
-            component.setVisual(Open);
-            component.setSkip(CheckVacuum);
+//            component.setCheckVisual(Boolean.TRUE);
+//            component.setCheckVacuum(Boolean.TRUE);
             component.setSpeed(0);
         }
 
@@ -300,27 +300,16 @@ public class PPConverter extends javax.swing.JFrame {
         for (int x = 0; x < cv.getComponentListTableModel().getColumnCount(); x++) {
             ComponentListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
         }
-        if (cv.getStackList() == null){
-            cv.setStackList(new ArrayList<Stack>());
-            cv.getStackList().add(new Stack(cv.getICL()));
-            cv.getStackList().get(cv.getStackList().size()-1).setNo(cv.getStackList().size()-1);
-            cv.setStackTableModel(new stackTableModel(cv.getStackList()));
+        cv.sanitizeAngles();
+        cv.makeStackList();
 
-            StackListTable.setModel(cv.getStackTableModel());
-            for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
-                StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
-            }
+        cv.setStackTableModel(new stackTableModel(cv.getStackList()));
 
-        } else {
-            cv.getStackList().add(new Stack(cv.getICL()));
-            cv.getStackList().get(cv.getStackList().size()-1).setNo(cv.getStackList().size()-1);
-//            cv.setStackTableModel(new stackTableModel(cv.getStackList()));
-
-//            StackListTable.setModel(cv.getStackTableModel());
-//            for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
-//                StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
-//            }
+        StackListTable.setModel(cv.getStackTableModel());
+        for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
+            StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
         }
+
         
         StackListTable.updateUI();
         ComponentListTable.updateUI();
@@ -392,10 +381,10 @@ public class PPConverter extends javax.swing.JFrame {
     private javax.swing.JTable ComponentListTable;
     private javax.swing.JScrollPane FileInfoPane;
     private javax.swing.JTable FileInfoTable;
-    private javax.swing.JTable ReelConfigurationListTable;
-    private javax.swing.JScrollPane ReelConfigurationScrollPane;
     private javax.swing.JScrollPane StackListScrollPane;
     private javax.swing.JTable StackListTable;
+    private javax.swing.JTable StackPresetsListTable;
+    private javax.swing.JScrollPane StackPresetsScrollPane;
     private javax.swing.JCheckBox bothHeads;
     private javax.swing.JRadioButton bottomLayerButton;
     private javax.swing.JMenu editMenu;

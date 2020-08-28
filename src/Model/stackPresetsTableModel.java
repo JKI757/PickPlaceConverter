@@ -32,16 +32,16 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author josh
  */
-public class reelConfigurationTableModel extends AbstractTableModel{
+public class stackPresetsTableModel extends AbstractTableModel{
     
     
-    private String[] columnNames = {"Number","Component","Side","Position"};
+    private String[] columnNames = {"Number","Component ID","Side","Position", "Height", "Speed","Check Vacuum", "Check Visual"};
     private ArrayList<Reel> data;
     
-    public reelConfigurationTableModel(ArrayList<Reel> data){
+    public stackPresetsTableModel(ArrayList<Reel> data){
         this.data = data;
     }
-    public reelConfigurationTableModel(){
+    public stackPresetsTableModel(){
         this.data = new ArrayList<Reel> ();
     }
     public void setColumnNames(String[] cn){ columnNames = cn;}
@@ -69,13 +69,25 @@ public class reelConfigurationTableModel extends AbstractTableModel{
                 return Row.getDesignator();
             }
             case 1:{
-                return Row.getComponent().getComment();
+                return Row.getComponent().getComponentID();
             }
             case 2:{
                 return Row.getSide();
             }
             case 3:{
                 return Row.getPosition();
+            }
+            case 4:{
+                return Row.getComponent().getHeight();
+            }
+            case 5:{
+                return Row.getComponent().getSpeed();
+            }
+            case 6:{
+                return Row.getComponent().isCheckVacuum();
+            }
+            case 7:{
+                return Row.getComponent().isCheckVisual();
             }
             default: return null;
         }
@@ -92,7 +104,7 @@ public class reelConfigurationTableModel extends AbstractTableModel{
                     Row.setDesignator((Integer)value);
                 };break;
                 case 1:{
-                    Row.setComponent((Component)value);//this will not work.  Set the component line to non-editable for now, fix will be a lookup or something
+                    Row.getComponent().setComponentID((String)value);
                 };break;
                 case 2:{
                     Row.setSide((Integer)value);
@@ -100,6 +112,19 @@ public class reelConfigurationTableModel extends AbstractTableModel{
                 case 3:{
                     Row.setDesignator((Integer)value);
                 };break;
+                case 4:{
+                    Row.getComponent().getHeight();
+                };break;
+                case 5:{
+                    Row.getComponent().setSpeed((Integer)value);
+                };break;
+                case 6:{
+                    Row.getComponent().setCheckVacuum(true);
+                };break;
+                case 7:{
+                    Row.getComponent().setCheckVisual(true);
+                };break;
+
             }
         data.set(row, Row);
         fireTableCellUpdated(row,col);

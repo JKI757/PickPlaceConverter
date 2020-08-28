@@ -35,7 +35,7 @@ import javax.swing.table.AbstractTableModel;
 public class stackTableModel extends AbstractTableModel{
     
     
-    private String[] columnNames = {"Stack","X-Offset","Y-Offset","Feed","Comment","Head","Height","Speed", "Status", "Visual", "Count" };
+    private String[] columnNames = {"Stack","X-Offset","Y-Offset","Feed","Component ID", "Angle", "Head","Height","Speed", "Vacuum Check", "Visual Check", "Count" };
     private ArrayList<Stack> data;
     
     public stackTableModel(ArrayList<Stack> data){
@@ -66,7 +66,7 @@ public class stackTableModel extends AbstractTableModel{
         
         switch(col){
             case 0: {
-                return Row.getNo();
+                return Row.getStackID();
             }
             case 1:{
                 return Row.getxOffset();
@@ -78,24 +78,27 @@ public class stackTableModel extends AbstractTableModel{
                 return Row.getFeed();
             }
             case 4:{
-                return Row.getComment();
+                return Row.getComponentID();
             }
             case 5:{
-                return Row.getHead();
+                return Row.getAngle();
             }
             case 6:{
-                return Row.getHeight();
+                return Row.getHead();
             }
             case 7:{
-                return Row.getSpeed();
+                return Row.getHeight();
             }
             case 8:{
-                return Row.getStatus();
+                return Row.getSpeed();
             }
             case 9:{
-                return Row.getVisual();
+                return Row.isCheckVacuum();
             }
             case 10:{
+                return Row.isCheckVisual();
+            }
+            case 11:{
                 return Row.getCount();
             }
             default: return null;
@@ -110,7 +113,7 @@ public class stackTableModel extends AbstractTableModel{
         Stack Row = data.get(row);
                switch(col){
                 case 0: {
-                    Row.setNo((Integer)value);
+                    Row.setStackID((Integer)value);
                 };break;
                 case 1:{
                     Row.setxOffset((Float)value);
@@ -119,27 +122,31 @@ public class stackTableModel extends AbstractTableModel{
                     Row.setyOffset((Float)value);
                 };break;
                 case 3:{
-                    Row.setFeed((Float)value);
+                    Row.setFeed((Integer)value);
                 };break;
                 case 4:{
                     Row.setComment((String)value);
                 };break;
                 case 5:{
+                    Row.setAngle((Float)value);
+                };break;
+                
+                case 6:{
                     Row.setHead((Integer)value);
                 };break;
-                case 6:{
+                case 7:{
                     Row.setHeight((Float)value);
                 };break;
-                case 7:{
+                case 8:{
                     Row.setSpeed((Integer)value);
                 };break;
-                case 8:{
-                    Row.setStatus((String)value);
-                };break;
                 case 9:{
-                    Row.setVisual((String)value);
+                    Row.setCheckVacuum((boolean)value);
                 };break;
                 case 10:{
+                    Row.setCheckVisual((boolean)value);
+                };break;
+                case 11:{
                     Row.setCount((Integer)value);
                 };break;
             }
@@ -164,10 +171,10 @@ public class stackTableModel extends AbstractTableModel{
     public boolean isCellEditable(int row, int col) {
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
-        if (col < 0) {
-            return false;
-        } else {
+        if (col != 0 && col != 4 && col != 11) {
             return true;
+        } else {
+            return false;
         }
     }
 

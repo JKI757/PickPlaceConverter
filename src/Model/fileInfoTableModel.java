@@ -84,7 +84,7 @@ public class fileInfoTableModel extends AbstractTableModel{
                 return Row.getRotation();
             }
             case 6:{
-                return Row.getComment();
+                return Row.getComponentID();
             }
             default: return null;
         }
@@ -116,7 +116,7 @@ public class fileInfoTableModel extends AbstractTableModel{
                     Row.setRotation((Float)value);
                 };break;
                 case 6:{
-                    Row.setComment((String)value);
+                    Row.setComponentID((String)value);
                 };break;
             }
         data.set(row, Row);

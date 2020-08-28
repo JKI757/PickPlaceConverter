@@ -36,7 +36,7 @@ public class Component{
     float XCoord;
     float YCoord;
     char Layer;
-    String Comment;
+    String ComponentID;
     
     String Table;
     int No;
@@ -48,11 +48,24 @@ public class Component{
     float Angle;
     float Height;
     int Speed;
-    public enum Skip{None,Skip,CheckVacuum};
-    Skip skip; //check vacuum
-    public enum Visual{Open,Close};
-    Visual visual; //Visual
-    //Comment
+    boolean checkVacuum;
+    boolean checkVisual;
+
+    public boolean isCheckVacuum() {
+        return checkVacuum;
+    }
+
+    public void setCheckVacuum(boolean checkVacuum) {
+        this.checkVacuum = checkVacuum;
+    }
+
+    public boolean isCheckVisual() {
+        return checkVisual;
+    }
+
+    public void setCheckVisual(boolean checkVisual) {
+        this.checkVisual = checkVisual;
+    }
     
     int Delay;
 
@@ -104,28 +117,12 @@ public class Component{
         this.Height = Height;
     }
 
-    public Skip getSkip() {
-        return skip;
-    }
-
-    public void setSkip(Skip skip) {
-        this.skip = skip;
-    }
-
     public int getSpeed() {
         return Speed;
     }
 
     public void setSpeed(int Speed) {
         this.Speed = Speed;
-    }
-
-    public Visual getVisual() {
-        return visual;
-    }
-
-    public void setVisual(Visual v) {
-        this.visual = v;
     }
 
     public int getDelay() {
@@ -145,7 +142,7 @@ public class Component{
     public float getYCoord(){return YCoord;}
     public char getLayer(){return Layer;}
     public float getRotation(){return Angle;}
-    public String getComment(){return Comment;}
+    public String getComponentID(){return ComponentID;}
     
     public void     setDesignator(int d){ Designator = d;}
     public void     setFootprint(String f){Footprint = f;}
@@ -153,7 +150,7 @@ public class Component{
     public void     setYCoord(float y){ YCoord = y;}
     public void     setLayer(char l){ Layer = l;}
     public void     setRotation(float r){ Angle = r;}
-    public void     setComment(String c){Comment = c ;}
+    public void     setComponentID(String c){ComponentID = c ;}
     
     public Component (String s, String delimiter){
 //this is deisigned to take a component string from the csv file and create a component
@@ -170,9 +167,27 @@ public class Component{
         YCoord = Float.parseFloat(strArr[3]);
         Layer = strArr[4].charAt(0);
         Angle = Float.parseFloat(strArr[5]);
-        Comment = strArr[6];
+        ComponentID = strArr[6];
         }catch (NumberFormatException e){
             System.out.println(e.getMessage());
         }
     }
+    
+    public Component (){
+//this is deisigned to take a component string from the csv file and create a component
+        
+        
+        try{
+        Designator = 0;
+        Footprint = "";
+        XCoord = 0.0f;
+        YCoord = 0.0f;
+        Layer = ' ';
+        Angle = 0.0f;
+        ComponentID = "";
+        }catch (NumberFormatException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

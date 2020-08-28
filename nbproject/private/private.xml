@@ -5,14 +5,14 @@
         <group>
             <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/pickplaceconverter/PickPlaceConverter.java</file>
             <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/View/PPConverter.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/componentTable.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/panelArray.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/Station.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/stationTable.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Controller/createOutputFile.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/stackTableModel.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/Reel.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/reelConfigurationTableModel.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/Stack.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/outputComponent.java</file>
             <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/Component.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/panelArrayTable.java</file>
-            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Controller/readInputFile.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Model/fileInfoTableModel.java</file>
+            <file>file:/Users/josh/Documents/Code/PickPlaceConverter/src/Controller/controllerVariables.java</file>
         </group>
     </open-files>
 </project-private>

@@ -25,7 +25,6 @@
  */
 package Model;
 
-import Model.Component.Skip;
 import java.util.ArrayList;
 
 /**
@@ -33,76 +32,51 @@ import java.util.ArrayList;
  * @author josh
  */
 public class Stack {
-    int No;
+    int stackID;
     float xOffset;
     float yOffset;
-    float Feed;
-    String Comment;
-    int Head;
-    float Height;
-    int Speed;
-    String Status;
-    String Visual;
+    int Feed;
     int Count;
-    
     ArrayList<Component> componentList;
     
-    public Stack(ArrayList<Component> cl){
-        this.componentList = cl;
+    // a stack is simply a configuration item that holds a single reel of a single component
+    public Stack(ArrayList<Component> c){
+        this.stackID = 0;
+        this.componentList = c;
         this.Count = this.componentList.size();
-        No=0;
         xOffset = 0.0f;
         yOffset = 0.0f;
-        Feed = componentList.get(0).getSpeed();//this might be wrong, check it
-        Comment = "";
-        Head = componentList.get(0).getPHead();
-        Height = componentList.get(0).getHeight();
-        Speed = componentList.get(0).getSpeed();
-        switch (componentList.get(0).getSkip()){
-            case None:{ Status = "None";}
-            case Skip:{ Status = "Skip";}
-            case CheckVacuum:{ Status = "Check Vacuum";}
-        }
-        switch (componentList.get(0).getVisual()){
-            case Open:{Visual = "Open";}
-            case Close:{Visual = "Close";}  
-        }
-
-        
+        Feed = 0;
     }
+    public Stack(){
+        this.stackID = 0;
+        this.componentList = new ArrayList<Component> ();
+        this.Count = 1;
+        xOffset = 0.0f;
+        yOffset = 0.0f;
+        Feed = 0;
+    }
+    public Stack(Component c){
+        this.stackID = 0;
+        this.componentList = new ArrayList<Component> ();
+        this.componentList.add(c);
+        this.Count = 1;
+        xOffset = 0.0f;
+        yOffset = 0.0f;
+        Feed = 0;
+
+    }
+
     public ArrayList<Component> getComponentList() {
         return componentList;
     }
 
-    public void setComponentList(ArrayList<Component> componentList) {
-        this.componentList = componentList;
-        this.Count = this.componentList.size();
-        No=0;
-        xOffset = 0.0f;
-        yOffset = 0.0f;
-        Feed = componentList.get(0).getSpeed();//this might be wrong, check it
-        Comment = "";
-        Head = componentList.get(0).getPHead();
-        Height = componentList.get(0).getHeight();
-        Speed = componentList.get(0).getSpeed();
-        switch (componentList.get(0).getSkip()){
-            case None:{ Status = "None";}
-            case Skip:{ Status = "Skip";}
-            case CheckVacuum:{ Status = "Check Vacuum";}
-        }
-        switch (componentList.get(0).getVisual()){
-            case Open:{Visual = "Open";}
-            case Close:{Visual = "Close";}  
-        }
-
-    }
-    
-    public int getNo() {
-        return No;
+    public int getStackID() {
+        return stackID;
     }
 
-    public void setNo(int No) {
-        this.No = No;
+    public void setStackID(int stackID) {
+        this.stackID = stackID;
     }
 
     public float getxOffset() {
@@ -121,69 +95,95 @@ public class Stack {
         this.yOffset = yOffset;
     }
 
-    public float getFeed() {
-        return Feed;
+    public int getFeed() {
+        return this.Feed;
     }
 
-    public void setFeed(float Feed) {
-        this.Feed = Feed;
+    public void setFeed(int Feed) {
+        this.Feed = Feed ;
     }
 
-    public String getComment() {
-        return Comment;
+    public String getComponentID() {
+        return this.componentList.get(0).getComponentID();
     }
 
     public void setComment(String Comment) {
-        this.Comment = Comment;
+        for (Component c : componentList){
+            c.setComponentID(Comment);
+        }
+    }
+    
+    public float getAngle() {
+        return this.componentList.get(0).getAngle();
     }
 
+    public void setAngle(float Angle) {
+        for (Component c : componentList){
+            c.setAngle(Angle);
+        }
+    }
+
+
     public int getHead() {
-        return Head;
+        return this.componentList.get(0).getPHead();
     }
 
     public void setHead(int Head) {
-        this.Head = Head;
+        for (Component c : componentList){
+            c.setPHead(Head);
+        }
     }
 
     public float getHeight() {
-        return Height;
+        return this.componentList.get(0).getHeight();
     }
 
     public void setHeight(float Height) {
-        this.Height = Height;
+        for (Component c : componentList){
+            c.setHeight(Height);
+        }
     }
 
     public int getSpeed() {
-        return Speed;
+        return this.componentList.get(0).getSpeed();
     }
 
     public void setSpeed(int Speed) {
-        this.Speed = Speed;
+        for (Component c : componentList){
+            c.setSpeed(Speed);
+        }
     }
 
-    public String getStatus() {
-        return Status;
+    public boolean isCheckVacuum() {
+        return this.componentList.get(0).isCheckVacuum();
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    public void setCheckVacuum(boolean checkVacuum) {
+        for (Component c : componentList){
+            c.setCheckVacuum(checkVacuum);
+        }
     }
 
-    public String getVisual() {
-        return Visual;
+    public boolean isCheckVisual() {
+        return this.componentList.get(0).isCheckVisual();
     }
 
-    public void setVisual(String Visual) {
-        this.Visual = Visual;
+    public void setCheckVisual(boolean Visual) {
+        for (Component c : componentList){
+            c.setCheckVisual(Visual);
+        }
     }
 
     public int getCount() {
-        return Count;
+        return this.componentList.size();
     }
 
     public void setCount(int Count) {
         this.Count = Count;
     }
+    public void incrementCount(){this.Count++;}
     
-    
+    public void addComponent(Component c){
+        this.componentList.add(c);
+    }
 }
