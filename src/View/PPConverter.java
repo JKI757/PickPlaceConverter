@@ -39,7 +39,7 @@ public class PPConverter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        layerButtonGroup = new javax.swing.ButtonGroup();
+
         mainTabFrame = new javax.swing.JTabbedPane();
         FileInfoPane = new javax.swing.JScrollPane();
         FileInfoTable = new javax.swing.JTable();
@@ -51,18 +51,13 @@ public class PPConverter extends javax.swing.JFrame {
         StackPresetsListTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         generateStackButton = new javax.swing.JButton();
-        bothHeads = new javax.swing.JCheckBox();
-        topLayerButton = new javax.swing.JRadioButton();
-        bottomLayerButton = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
         invertButton = new javax.swing.JButton();
+        generatePresets = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         readFileMenuItem = new javax.swing.JMenuItem();
         writeFileMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
-        layerButtonGroup.add(topLayerButton);
-        layerButtonGroup.add(bottomLayerButton);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,55 +99,27 @@ public class PPConverter extends javax.swing.JFrame {
             }
         });
 
-        bothHeads.setText("Use Both Heads");
-        bothHeads.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bothHeadsActionPerformed(evt);
-            }
-        });
-
-        topLayerButton.setSelected(true);
-        topLayerButton.setText("Top");
-        topLayerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topLayerButtonActionPerformed(evt);
-            }
-        });
-
-        bottomLayerButton.setText("Bottom");
-        bottomLayerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bottomLayerButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Layer");
-
         invertButton.setText("Invert Stack");
+
+        generatePresets.setText("Generate Presets");
+        generatePresets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generatePresetsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(generateStackButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(invertButton))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(bothHeads)
-                                .addGap(166, 166, 166)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(topLayerButton)
-                                    .addComponent(bottomLayerButton)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(generateStackButton)
+                .addGap(18, 18, 18)
+                .addComponent(invertButton)
+                .addGap(18, 18, 18)
+                .addComponent(generatePresets)
+                .addContainerGap(597, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,16 +127,9 @@ public class PPConverter extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(generateStackButton)
-                    .addComponent(invertButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(topLayerButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bothHeads)
-                    .addComponent(bottomLayerButton))
-                .addGap(25, 25, 25))
+                    .addComponent(invertButton)
+                    .addComponent(generatePresets))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         fileMenu.setText("File");
@@ -213,9 +173,9 @@ public class PPConverter extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainTabFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainTabFrame, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -269,7 +229,7 @@ public class PPConverter extends javax.swing.JFrame {
     private void generateStackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateStackButtonActionPerformed
         // TODO add your handling code here:
 
-        for (Component component : cv.getRF().getComponentList()) {
+        for (Component component : cv.getICL()){
 
             //this is for future use, we're going to sanitize the angles here
             //we're going to look up components in the database
@@ -309,35 +269,31 @@ public class PPConverter extends javax.swing.JFrame {
         for (int x = 0; x < cv.getStackTableModel().getColumnCount(); x++) {
             StackListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
         }
-
+        
         
         StackListTable.updateUI();
         ComponentListTable.updateUI();
 
     }//GEN-LAST:event_generateStackButtonActionPerformed
 
-    private void bottomLayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bottomLayerButtonActionPerformed
-        // TODO add your handling code here:
-        cv.setLayer(Bottom);
-    }//GEN-LAST:event_bottomLayerButtonActionPerformed
-
-    private void topLayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerButtonActionPerformed
-        // TODO add your handling code here:
-        cv.setLayer(Top);
-    }//GEN-LAST:event_topLayerButtonActionPerformed
-
-    private void bothHeadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bothHeadsActionPerformed
-        // TODO add your handling code here:
-        if (bothHeads.isSelected()) {
-            cv.setUseBothHeads(true);
-        } else {
-            cv.setUseBothHeads(false);
-        }
-    }//GEN-LAST:event_bothHeadsActionPerformed
-
     private void generateStackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generateStackButtonMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_generateStackButtonMouseClicked
+
+    private void generatePresetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePresetsActionPerformed
+        cv.generatePresets();
+        cv.setStackPresetsTableModel(cv.getStackPresetsTableModel());
+        if (cv.getStackPresetsTableModel() != null){//TODO: this check may not be necessary.
+            StackPresetsListTable.setModel(cv.getStackPresetsTableModel());
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+            for (int x = 0; x < cv.getStackPresetsTableModel().getColumnCount(); x++) {
+                StackPresetsListTable.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
+            }
+            
+        StackPresetsListTable.updateUI();
+        }
+    }//GEN-LAST:event_generatePresetsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,19 +341,16 @@ public class PPConverter extends javax.swing.JFrame {
     private javax.swing.JTable StackListTable;
     private javax.swing.JTable StackPresetsListTable;
     private javax.swing.JScrollPane StackPresetsScrollPane;
-    private javax.swing.JCheckBox bothHeads;
-    private javax.swing.JRadioButton bottomLayerButton;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JButton generatePresets;
     private javax.swing.JButton generateStackButton;
     private javax.swing.JButton invertButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.ButtonGroup layerButtonGroup;
     private javax.swing.JTabbedPane mainTabFrame;
     private javax.swing.JMenuItem readFileMenuItem;
-    private javax.swing.JRadioButton topLayerButton;
     private javax.swing.JMenuItem writeFileMenuItem;
     // End of variables declaration//GEN-END:variables
 }

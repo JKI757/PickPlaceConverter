@@ -38,6 +38,7 @@ import java.io.File;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -181,12 +182,32 @@ public class controllerVariables {
     public void sanitizeAngles(){
         if (this.icl != null){
             for (Component c : this.icl){
-                if (c.getAngle() >= 180){
-                    c.setAngle((c.getAngle() - 180));
-                }else if (c.getAngle() < -180){
-                    c.setAngle((c.getAngle() + 180));
+                if (c.getAngle() > 180){
+                    float newAngle = (c.getAngle() - 180) - 180;
+                    c.setAngle( newAngle );
+                }else if (c.getAngle() <= -180){
+                    float newAngle = -1*((c.getAngle() + 180) - 180);
+                    c.setAngle( newAngle );
                 }
             }
         }
+    }
+    
+    public static float sanitizeAngle(float angle){
+                if (angle > 180){
+                    float newAngle = (angle - 180) - 180;
+                    return( newAngle );
+                }else if (angle <= -180){
+                    float newAngle = 180 - (-1)*(angle + 180);
+                    return( newAngle );
+                }else{ return angle; }
+    }
+    
+    public void generatePresets(){
+        reelList = new ArrayList<Reel>();
+        for (HashMap.Entry mapElement : stackMap.entrySet()){
+             reelList.add(new Reel((Stack)(mapElement.getValue())));
+        }
+        sptm = new stackPresetsTableModel(reelList);
     }
 }

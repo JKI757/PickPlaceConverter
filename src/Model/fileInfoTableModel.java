@@ -25,6 +25,7 @@
  */
 package Model;
 
+import Controller.controllerVariables;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -113,7 +114,7 @@ public class fileInfoTableModel extends AbstractTableModel{
                     Row.setLayer((char)value);
                 };break;
                 case 5:{
-                    Row.setRotation((Float)value);
+                    Row.setRotation(controllerVariables.sanitizeAngle((Float)value));
                 };break;
                 case 6:{
                     Row.setComponentID((String)value);

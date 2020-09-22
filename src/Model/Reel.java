@@ -44,6 +44,12 @@ public class Reel {
         this.position = position;
         this.designator = designator;
     }
+    public Reel(Stack s){
+        this.c = s.getComponentList().get(0);
+        this.side = 1;
+        this.position = s.getStackID();
+        this.designator = s.getStackID();
+    }
     
 
     public int getDesignator() {

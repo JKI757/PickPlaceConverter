@@ -25,6 +25,7 @@
  */
 package Model;
 
+import Controller.controllerVariables;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -127,7 +128,7 @@ public class componentListTableModel extends AbstractTableModel{
                     Row.setYCoord((Float)value);
                 };break;
                 case 5:{
-                    Row.setAngle((Float)value);
+                    Row.setAngle(controllerVariables.sanitizeAngle((Float)value));
                 };break;
                 case 6:{
                     Row.setHeight((Float)value);

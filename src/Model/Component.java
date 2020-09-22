@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Controller.controllerVariables;
 import java.util.ArrayList;
 
 /**
@@ -166,7 +167,7 @@ public class Component{
         XCoord = Float.parseFloat(strArr[2]);
         YCoord = Float.parseFloat(strArr[3]);
         Layer = strArr[4].charAt(0);
-        Angle = Float.parseFloat(strArr[5]);
+        Angle = controllerVariables.sanitizeAngle(Float.parseFloat(strArr[5]));
         ComponentID = strArr[6];
         }catch (NumberFormatException e){
             System.out.println(e.getMessage());
