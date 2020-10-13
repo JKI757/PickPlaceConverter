@@ -7,6 +7,7 @@ package View;
 
 import Controller.controllerVariables;
 import static Controller.controllerVariables.Layer.*;
+import Controller.createOutputFile;
 import Controller.readInputFile;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -22,12 +23,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class PPConverter extends javax.swing.JFrame {
 
     controllerVariables cv;
+    createOutputFile cof;
     /**
      * Creates new form mainFrame
      */
     public PPConverter(controllerVariables cv) {
         this.cv = cv;
         initComponents();
+        cof = new createOutputFile(this.cv);
     }
 
     /**
@@ -213,13 +216,7 @@ public class PPConverter extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             cv.setOutputFile(fc.getSelectedFile());
             cv.setCurrentDirectory(cv.getOutputFile().getPath());//store the current directory here so we can retrieve it later when we do other file operations
-
-//            cv.setRF(new readInputFile(cv.getInputFile()));
-//            cv.getRF().getComponentList();
-//            cv.setfileInfoTabHeaders(cv.getRF().getColumnNames());
-//            cv.setFileInfoTableModel(new Model.fileInfoTableModel(cv.getRF().getComponentList()));
-//            FileInfoTable.setModel(cv.getFileInfoTableModel());
-//            FileInfoTable.updateUI();
+            this.cof.generateCSV(fc.getSelectedFile());
         } else {
 
         }
